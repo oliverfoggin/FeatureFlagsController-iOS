@@ -19,7 +19,7 @@ public protocol FeatureFlagType {
     var value: Value { get nonmutating set }
     var valuePublisher: AnyPublisher<Value, Never> { get }
     
-    var view: View { get }
+    @ViewBuilder @MainActor var view: Self.View { get }
 }
 
 extension FeatureFlagType {

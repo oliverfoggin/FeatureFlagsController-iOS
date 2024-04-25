@@ -11,8 +11,8 @@ internal struct FeatureFlagViewFactory {
     
     let id: String
     let group: String?
-    let makeView: () -> AnyView
-    
+    let makeView: @MainActor () -> AnyView
+
     init<F: FeatureFlagType>(_ flag: F) {
         id = flag.id
         group = flag.group
