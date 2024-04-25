@@ -32,6 +32,7 @@ public struct FeatureFlagsView: View {
                     Section(header: Text(groupName ?? "")) {
                         ForEach(factories, id: \.id) { factory in
                             factory.makeView()
+                                .id(factory.id)
                         }
                     }
                 }
