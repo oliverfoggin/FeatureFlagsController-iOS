@@ -51,9 +51,10 @@ public struct FeatureFlagsGroup<First: FeatureFlagType, Second: FeatureFlagType>
             .prepend(self.activeFeatureFlagID)
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .flatMap { _ in
+            .map { _ in
                 self.activeValuePublisher.prepend(self.value)
             }
+            .switchToLatest()
             .eraseToAnyPublisher()
     }
     

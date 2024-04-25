@@ -24,7 +24,13 @@ internal final class FeatureFlagsController: ObservableObject {
         let publisher = flag
             .valuePublisher
             .handleEvents(
-                receiveOutput: { _ in self.objectWillChange.send() },
+                receiveOutput: { _ in
+                    Task {
+                        await MainActor.run {
+                            self.objectWillChange.send()
+                        }
+                    }
+                },
                 receiveCancel: { self.removePublisher(for: flag) }
             )
             .share()
