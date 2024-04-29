@@ -21,6 +21,8 @@ internal final class FeatureFlagsController: ObservableObject {
             return publisher
         }
 
+        print("🐣", flag.title)
+
         let publisher = flag
             .valuePublisher
             .handleEvents(
@@ -31,7 +33,10 @@ internal final class FeatureFlagsController: ObservableObject {
                         }
                     }
                 },
-                receiveCancel: { self.removePublisher(for: flag) }
+                receiveCancel: {
+                    print("🔥", flag.title)
+                    self.removePublisher(for: flag)
+                }
             )
             .share()
             .prepend(flag.value)
